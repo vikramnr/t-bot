@@ -21,17 +21,18 @@ app.post('/new-message', async (req, res) => {
 			console.log(err)
 			res.end(err)
 		}
-	}
-	try {
-		let response = await axios.post(`https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`, {
-			chat_id: message.chat.id,
-			text: 'Hey there',
-		})
-		console.log(response)
-		res.end('ok')
-	} catch (err) {
-		console.log(err)
-		res.end(err)
+	} else {
+		try {
+			let response = await axios.post(`https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`, {
+				chat_id: message.chat.id,
+				text: 'Hey there',
+			})
+			console.log(response)
+			res.end('ok')
+		} catch (err) {
+			console.log(err)
+			res.end(err)
+		}
 	}
 })
 
