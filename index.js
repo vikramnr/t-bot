@@ -10,7 +10,17 @@ app.post('/new-message', async (req, res) => {
 	const { message } = req.body
 
 	if (!message || message.text.toLowerCase().indexOf('hello') < 0) {
-		return res.end()
+		try {
+			let response = await axios.post(`https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`, {
+				chat_id: message.chat.id,
+				text: `Oops I didn't catch that. Could you repeat again`,
+			})
+			console.log(response)
+			res.end('ok')
+		} catch (err) {
+			console.log(err)
+			res.end(err)
+		}
 	}
 	try {
 		let response = await axios.post(`https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`, {
