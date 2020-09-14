@@ -22,7 +22,7 @@ router.post('/new-message', async (req, res) => {
         const date = moment().format("MMMM_DD")
         const response = await axios.get(`https://en.wikipedia.org/w/rest.php/v1/page/${date}`)
         let data = response.data.source.split('Events==')
-        data =  data[1].split('*').slice(0,10)
+        data =  data[1].split('*').slice(0,100)
         data = sanitizeHtml(data)
         console.log(data)
 		try {
