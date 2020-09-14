@@ -1,30 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios')
-const moment = require('moment')
-const sanitizeHtml = require('sanitize-html');
+const { gatherData } =require('./middleware')
 
 
-router.get('/',async(req,res) => {
-    const date = moment().format("MMMM_DD")
-    console.log(date)
-    console.log(`https://en.wikipedia.org/w/rest.php/v1/page/${date}`)
-    const response = await axios.get(`https://en.wikipedia.org/w/rest.php/v1/page/${date}`)
-    let data = response.data.source.split('Events==')
-    data =  data[1].split('*')
-    res.send(response.data)
+router.get('/', gatherData ,async(req,res) => {
+    let data = req.body.wiki_data
+    console.log(req.body.wiki_data)
+    res.send(data)
 })
 
-router.post('/new-message', async (req, res) => {
+
+router.post('/new-message', gatherData ,async (req, res) => {
 	const { message } = req.body
 
 	if (!message || message.text.toLowerCase().indexOf('hello') < 0) {
-        const date = moment().format("MMMM_DD")
-        const response = await axios.get(`https://en.wikipedia.org/w/rest.php/v1/page/${date}`)
-        let data = response.data.source.split('Events==')
-        data =  data[1].split('*').slice(0,100)
-        data = sanitizeHtml(data)
-        console.log(data)
+        let data = req.body.wiki_data
+        console.log(req.body.wiki_data)
 		try {
 			let response = await axios.post(`https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`, {
 				chat_id: message.chat.id,
