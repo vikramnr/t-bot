@@ -26,7 +26,7 @@ router.post('/new-message', async (req, res) => {
 		try {
 			let response = await axios.post(`https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`, {
 				chat_id: message.chat.id,
-				text: data,
+				text: data.slice(0,100),
 			})
 			console.log(response)
 			res.end('ok')
