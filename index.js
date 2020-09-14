@@ -1,41 +1,34 @@
+var createError = require('http-errors');
+const bodyParser = require('body-parser')
+const logger = require('morgan');
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser')
-const axios = require('axios')
 
+var indexRouter = require('./routes/index');
+
+// var app = express();
+
+// view engine setup
+app.use(logger('dev'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.post('/new-message', async (req, res) => {
-	const { message } = req.body
+app.use('/', indexRouter);
 
-	if (!message || message.text.toLowerCase().indexOf('hello') < 0) {
-		try {
-			let response = await axios.post(`https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`, {
-				chat_id: message.chat.id,
-				text: `Oops I didn't catch that. Could you repeat again`,
-			})
-			console.log(response)
-			res.end('ok')
-		} catch (err) {
-			console.log(err)
-			res.end(err)
-		}
-	} else {
-		try {
-			let response = await axios.post(`https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`, {
-				chat_id: message.chat.id,
-				text: 'Hey there',
-			})
-			console.log(response)
-			res.end('ok')
-		} catch (err) {
-			console.log(err)
-			res.end(err)
-		}
-	}
-})
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 
-app.listen(process.env.PORT || 3000, () => {
-	console.log('server started at port 3000')
-})
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+module.exports = app;
