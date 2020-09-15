@@ -26,7 +26,7 @@ const chuckResponse = async (data, chat_id) => {
       let response = await axios.post(
         `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`,
         {
-          chat_id: message.chat.id,
+          chat_id: chat_id,
           text: choppedData,
         }
       );
