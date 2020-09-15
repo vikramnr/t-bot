@@ -14,7 +14,7 @@ router.get('/', gatherData ,async(req,res) => {
 router.post('/new-message', gatherData ,async (req, res) => {
 	const { message } = req.body
 
-	if (!message || message.text.toLowerCase().indexOf('hello') < 0) {
+	if (message.text.toLowerCase().indexOf('wiki') > 0) {
 		let data = req.body.wiki_data
 		let choppedData = chuckResponse(data)
         for (let u = 0; u < choppedData.length ; u++) {
@@ -37,7 +37,7 @@ router.post('/new-message', gatherData ,async (req, res) => {
 		try {
 			let response = await axios.post(`https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`, {
 				chat_id: message.chat.id,
-				text: 'Hey there',
+				text: 'Hey there. This is wikipedia bot that let sends the events of today. Type wiki for more details',
 			})
 			console.log(response)
 			res.end('ok')
