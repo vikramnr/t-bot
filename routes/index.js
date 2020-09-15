@@ -15,15 +15,15 @@ router.post('/new-message', gatherData ,async (req, res) => {
 	const { message } = req.body
 
 	if (!message || message.text.toLowerCase().indexOf('hello') < 0) {
-        let data = req.body.wiki_data
-        for (let u = 0; u < 10; u++) {
-			let choppedData = data.slice(u, u + 10);
+		let data = req.body.wiki_data
+		let choppedData = chuckResponse(data)
+        for (let u = 0; u < choppedData.length ; u++) {
 			try {
 			  let response = await axios.post(
 				`https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`,
 				{
 				  chat_id: message.chat.id,
-				  text: choppedData,
+				  text: choppedData[u],
 				}
 			  );
 			  console.log(response);

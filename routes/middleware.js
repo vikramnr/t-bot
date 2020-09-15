@@ -19,24 +19,12 @@ const gatherData = async (req, res, next) => {
   next();
 };
 
-const chuckResponse = async (data, chat_id) => {
-  for (let u = 0; u < 10; u++) {
-    let choppedData = data.slice(u, u + 50);
-    try {
-      let response = await axios.post(
-        `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`,
-        {
-          chat_id: chat_id,
-          text: choppedData,
-        }
-      );
-      console.log(response);
-      res.end("ok");
-    } catch (err) {
-      console.log(err);
-      res.end(err);
-    }
+const chuckResponse =  (data) => {
+  let choppedData = []
+  for (let u = 0; u < 1000; u++) {
+    choppedData.push(data.slice(u, u + 50));
   }
+  return choppedData
 };
 
 module.exports = { gatherData, chuckResponse };
