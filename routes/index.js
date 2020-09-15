@@ -16,7 +16,23 @@ router.post('/new-message', gatherData ,async (req, res) => {
 
 	if (!message || message.text.toLowerCase().indexOf('hello') < 0) {
         let data = req.body.wiki_data
-        chuckResponse(data, message.chat.id)
+        for (let u = 0; u < 10; u++) {
+			let choppedData = data.slice(u, u + 50);
+			try {
+			  let response = await axios.post(
+				`https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`,
+				{
+				  chat_id: message.chat.id,
+				  text: choppedData,
+				}
+			  );
+			  console.log(response);
+			  res.end("ok");
+			} catch (err) {
+			  console.log(err);
+			  res.end(err);
+			}
+		}
 	} else {
 		try {
 			let response = await axios.post(`https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`, {
