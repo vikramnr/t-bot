@@ -14,7 +14,7 @@ router.get('/', gatherData ,async(req,res) => {
 router.post('/new-message', gatherData ,async (req, res) => {
 	const { message } = req.body
 
-	if (message.text.toLowerCase().indexOf('wiki') > 0) {
+	if (message.text && message.text.toLowerCase().indexOf('wiki') > 0) {
 		let data = req.body.wiki_data
 		let choppedData = chuckResponse(data)
         for (let u = 0; u < choppedData.length ; u++) {
