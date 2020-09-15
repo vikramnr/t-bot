@@ -17,7 +17,7 @@ router.post('/new-message', gatherData ,async (req, res) => {
 	if (!message || message.text.toLowerCase().indexOf('hello') < 0) {
         let data = req.body.wiki_data
         for (let u = 0; u < 10; u++) {
-			let choppedData = data.slice(u, u + 50);
+			let choppedData = data.slice(u, u + 10);
 			try {
 			  let response = await axios.post(
 				`https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`,
