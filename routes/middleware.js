@@ -3,6 +3,7 @@ const moment = require("moment");
 const sanitizeHtml = require("sanitize-html");
 const date = moment().format("MMMM_DD");
 
+
 const gatherData = async (req, res, next) => {
   console.log(`https://en.wikipedia.org/w/rest.php/v1/page/${date}`);
   const response = await axios.get(
@@ -15,7 +16,7 @@ const gatherData = async (req, res, next) => {
   const regex = /[[\]]/gi;
   // const regex1 = /[^A-Za-z0-9]/gi
   data = data.map((d) => d.replace(regex, ""));
-  req.body.wiki_data = data;
+  req.body.wiki_data = data
   next();
 };
 
@@ -23,8 +24,8 @@ const chuckResponse =  (data) => {
   let choppedData = []
   let dataLen = 0
   for (let u = 0; dataLen <= data.length; u++) {
-    dataLen+=10
-    choppedData.push(data.slice(u, u + 10));
+    dataLen+=20
+    choppedData.push(data.slice(u, u + 20));
   }
   return choppedData
 };
