@@ -21,7 +21,7 @@ const gatherData = async (req, res, next) => {
 
 const chuckResponse =  (data) => {
   let choppedData = []
-  for (let u = 0; u < 1000; u++) {
+  for (let u = 0; u < 50; u++) {
     choppedData.push(data.slice(u, u + 10));
   }
   return choppedData
