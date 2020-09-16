@@ -14,10 +14,12 @@ const checkCmd = async(req,res,next) => {
     const cmd = message.text.toLowerCase() || 'help'
     if(cmd !== 'help') {
           const fn = commands[cmd]
+          console.log(fn)
           req.body.cmdData = await eval(fn)
     }
     req.body.cmdData = commands[cmd]
   } else {
+    console.log('inside else')
     req.body.cmdData = 'Hey there!!. This is a bot that sends the historical events for today. For more details use "help"'
   }
   next()
