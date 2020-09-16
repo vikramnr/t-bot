@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 
 router.post("/new-message", async (req, res) => {
   const { message } = req.body;
-  const cmdData = 'Hey there!!. This is a bot that sends the historical events for today. For more details use "help"';
+  let cmdData = 'Hey there!!. This is a bot that sends the historical events for today. For more details use "help"';
   if (message && message.text) {
     const cmd = message.text.toLowerCase();
     if (cmd === "wiki") {
