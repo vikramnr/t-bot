@@ -22,6 +22,7 @@ router.get("/", checkCmd , async (req, res) => {
 
 router.post("/new-message", checkCmd ,async (req, res) => {
   const { message } = req.body
+  console.log(req.body)
   const data =  req.body.cmdData
     try {
       let response = await axios.post(
