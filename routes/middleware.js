@@ -13,7 +13,8 @@ const checkCmd = async(req,res,next) => {
   if (message) {
     const cmd = message.text.toLowerCase() || 'help'
     if(cmd !== 'help') {
-          req.body.cmdData = commands[cmd]()
+          const fn = commands[cmd]()
+          req.body.cmdData = await eval(fn)
     }
     req.body.cmdData = commands[cmd]
   } else {
