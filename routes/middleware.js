@@ -3,7 +3,6 @@ const moment = require("moment");
 const sanitizeHtml = require("sanitize-html");
 const cheerio = require('cheerio');
 const date = moment().format("MMMM_DD");
-const commands = ['wiki','onthisday','help']
 
 
 const checkCmd = async(req,res,next) => {
@@ -24,7 +23,6 @@ const checkCmd = async(req,res,next) => {
     req.body.cmdData = 'Hey there!!. This is a bot that sends the historical events for today. For more details use "help"'
     next()
   }
-  //next()
 }
 
 const getOnThisDay = async () => {

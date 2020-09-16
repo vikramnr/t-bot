@@ -2,20 +2,11 @@ const express = require("express");
 const axios = require("axios");
 const cheerio = require('cheerio');
 const router = express.Router();
-const { gatherData, chuckResponse, checkCmd } = require("./middleware");
+const { checkCmd } = require("./middleware");
 
 router.get("/", checkCmd , async (req, res) => {
   let data = req.body.cmdData
   console.log(data)
-  // const fruits = []
-  // const onthisResponse = await axios.get('https://www.onthisday.com/')
-  // const $ = cheerio.load(onthisResponse.data)
-  // $('.event-list').each(function(i, elem) {
-  //   fruits[i] = $(this).text();
-  //   console.log(elem)
-  //   console.log(i)
-  // });
-  // res.send(fruits)
   res.send('hello world')
 });
 
