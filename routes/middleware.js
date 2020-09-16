@@ -8,10 +8,10 @@ const commands = ['wiki','onthisday','help']
 
 const checkCmd = async(req,res,next) => {
   const { message } = req.body
-  console.log(message)
+  console.log(message,'message')
   if (message) {
     const cmd = message.text.toLowerCase()
-    console.log(cmd)
+    console.log(cmd,'cmd')
     if(cmd === 'wiki') {
       req.body.cmdData = await getWikiData()
     } else if (cmd === 'onthisday') {
