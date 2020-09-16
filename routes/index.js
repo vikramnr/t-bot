@@ -3,13 +3,13 @@ const router = express.Router();
 const axios = require("axios");
 const { gatherData, chuckResponse } = require("./middleware");
 
-router.get("/", gatherData, async (req, res) => {
-  let data = req.body.wiki_data;
-	let choppedData = chuckResponse(data);
-//   console.log(choppedData);
-//  res.send(choppedData[0].join('*'));
-	res.send(choppedData[0].join('***'))
-});
+// router.get("/", gatherData, async (req, res) => {
+//   let data = req.body.wiki_data;
+// 	let choppedData = chuckResponse(data);
+// //   console.log(choppedData);
+// //  res.send(choppedData[0].join('*'));
+// 	res.send(choppedData[0].join('***'))
+// });
 
 router.post("/new-message", gatherData, async (req, res) => {
   const { message } = req.body;
@@ -50,6 +50,4 @@ router.post("/new-message", gatherData, async (req, res) => {
   }
 });
 
-// https://en.wikipedia.org/w/rest.php/v1/page/September_13
-//September_14th
 module.exports = router;
