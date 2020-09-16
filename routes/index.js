@@ -16,20 +16,19 @@ router.get("/", checkCmd , async (req, res) => {
     console.log(elem)
     console.log(i)
   });
-
   console.log(fruits)
   res.send(fruits)
 });
 
 router.post("/new-message", checkCmd ,async (req, res) => {
   const { message } = req.body;
-  console.log(req.body.cmdData)
+  const data =  req.body.cmdData()
     try {
       let response = await axios.post(
         `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`,
         {
           chat_id: message.chat.id,
-          text: 'hey there'
+          text: data
         }
       );
       console.log(response);
