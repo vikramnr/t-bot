@@ -7,21 +7,24 @@ const commands = ['wiki','onthisday','help']
 
 
 const checkCmd = async(req,res,next) => {
-  const { message } = req.body
-  console.log(message,'message')
-  if (message && message.text) {
+  const message  = req.body.message
+  if (message) {
     const cmd = message.text.toLowerCase()
-    console.log(cmd,'cmd')
+    console.log(cmd)
     if(cmd === 'wiki') {
       req.body.cmdData = await getWikiData()
+      next()
     } else if (cmd === 'onthisday') {
       req.body.cmdData = await getOnThisDay()
+      next()
     }
     req.body.cmdData = 'Please use "wiki" for data from Wikipedia and "onthisday" for data from other websites'
+    next()
   } else {
     req.body.cmdData = 'Hey there!!. This is a bot that sends the historical events for today. For more details use "help"'
+    next()
   }
-  next()
+  //next()
 }
 
 const getOnThisDay = async () => {

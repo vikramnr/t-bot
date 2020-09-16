@@ -7,17 +7,16 @@ const { gatherData, chuckResponse, checkCmd } = require("./middleware");
 router.get("/", checkCmd , async (req, res) => {
   let data = req.body.cmdData
   console.log(data)
-  const fruits = []
-  const onthisResponse = await axios.get('https://www.onthisday.com/')
-  const $ = cheerio.load(onthisResponse.data)
-  console.log($.html())
-  $('.event-list').each(function(i, elem) {
-    fruits[i] = $(this).text();
-    console.log(elem)
-    console.log(i)
-  });
-  console.log(fruits)
-  res.send(fruits)
+  // const fruits = []
+  // const onthisResponse = await axios.get('https://www.onthisday.com/')
+  // const $ = cheerio.load(onthisResponse.data)
+  // $('.event-list').each(function(i, elem) {
+  //   fruits[i] = $(this).text();
+  //   console.log(elem)
+  //   console.log(i)
+  // });
+  // res.send(fruits)
+  res.send('hello world')
 });
 
 router.post("/new-message", checkCmd ,async (req, res) => {
