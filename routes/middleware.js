@@ -9,7 +9,7 @@ const commands = ['wiki','onthisday','help']
 const checkCmd = async(req,res,next) => {
   const { message } = req.body
   console.log(message,'message')
-  if (message) {
+  if (message && message.text) {
     const cmd = message.text.toLowerCase()
     console.log(cmd,'cmd')
     if(cmd === 'wiki') {
