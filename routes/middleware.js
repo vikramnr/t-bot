@@ -9,7 +9,7 @@ const commands = ['wiki','onthisday','help']
 const checkCmd = async(req,res,next) => {
   const { message } = req.body
   if (message) {
-    const cmd = message.text.toLowerCase() || 'help'
+    const cmd = message.text.toLowerCase()
     if(cmd === 'wiki') {
       req.body.cmdData = await getWikiData()
     } else if (cmd === 'onthisday') {
