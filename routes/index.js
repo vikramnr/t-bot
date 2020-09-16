@@ -1,28 +1,35 @@
 const express = require("express");
-const router = express.Router();
 const axios = require("axios");
-const { gatherData, chuckResponse } = require("./middleware");
+const cheerio = require('cheerio');
+const router = express.Router();
+const { gatherData, chuckResponse, checkCmd } = require("./middleware");
 
-// router.get("/", gatherData, async (req, res) => {
-//   let data = req.body.wiki_data;
-// 	let choppedData = chuckResponse(data);
-// //   console.log(choppedData);
-// //  res.send(choppedData[0].join('*'));
-// 	res.send(choppedData[0].join('***'))
-// });
+router.get("/", checkCmd , async (req, res) => {
+  let data = req.body.cmdData
+  console.log(data)
+  const fruits = []
+  const onthisResponse = await axios.get('https://www.onthisday.com/')
+  const $ = cheerio.load(onthisResponse.data)
+  console.log($.html())
+  $('.event-list').each(function(i, elem) {
+    fruits[i] = $(this).text();
+    console.log(elem)
+    console.log(i)
+  });
 
-router.post("/new-message", gatherData, async (req, res) => {
+  console.log(fruits)
+  res.send(fruits)
+});
+
+router.post("/new-message", async (req, res) => {
   const { message } = req.body;
-
-  if (message.text && message.text.toLowerCase().includes("wiki")) {
-    let data = req.body.wiki_data;
-    let choppedData = chuckResponse(data);
+  console.log(req.body.cmdData)
     try {
       let response = await axios.post(
         `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`,
         {
           chat_id: message.chat.id,
-          text: choppedData[0].join('***'),
+          text: 'hey there'
         }
       );
       console.log(response);
@@ -31,23 +38,6 @@ router.post("/new-message", gatherData, async (req, res) => {
       console.log(err);
       res.end(err);
     }
-  } else {
-    try {
-      let response = await axios.post(
-        `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`,
-        {
-          chat_id: message.chat.id,
-          text:
-            'Hey there. This is wikipedia bot that sends the historical events for today. Type "wiki" for more details on today events',
-        }
-      );
-      console.log(response);
-      res.end("ok");
-    } catch (err) {
-      console.log(err);
-      res.end(err);
-    }
-  }
 });
 
 module.exports = router;
