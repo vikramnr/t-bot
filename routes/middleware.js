@@ -27,13 +27,9 @@ const getOnThisDay = async () => {
   const onthisResponse = await axios.get('https://www.onthisday.com/')
   const $ = cheerio.load(onthisResponse.data)
   $('.event-list').each(function(i, elem) {
-    fruits[i] = $(this).text();
-    console.log(elem)
-    console.log(i)
+    events[i] = $(this).text();
   });
-
-  console.log(fruits)
-  return fruits
+  return events.join('***')
 }
 
 
