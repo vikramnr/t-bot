@@ -22,7 +22,7 @@ router.get("/", checkCmd , async (req, res) => {
 
 router.post("/new-message", checkCmd ,async (req, res) => {
   const { message } = req.body;
-  const data =  req.body.cmdData()
+  const data =  req.body.cmdData
     try {
       let response = await axios.post(
         `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`,
