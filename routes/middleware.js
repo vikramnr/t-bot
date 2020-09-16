@@ -3,23 +3,20 @@ const moment = require("moment");
 const sanitizeHtml = require("sanitize-html");
 const cheerio = require('cheerio');
 const date = moment().format("MMMM_DD");
-const commands = {'wiki':'getWikiData','onthisday':'getOnThisDay','help': 'Please use "wiki" for data from Wikipedia and "onthisday" for data from other websites'}
+const commands = ['wiki','onthisday','help']
 
 
 const checkCmd = async(req,res,next) => {
   const { message } = req.body
-  
-
   if (message) {
     const cmd = message.text.toLowerCase() || 'help'
-    if(cmd !== 'help') {
-          const fn = commands[cmd]
-          console.log(fn)
-          req.body.cmdData = await eval(fn)
+    if(cmd === 'wiki') {
+      req.body.cmdData = await getWikiData()
+    } else if (cmd === 'onthisday') {
+      req.body.cmdData = await getOnThisDay()
     }
-    req.body.cmdData = commands[cmd]
+    req.body.cmdData = 'Please use "wiki" for data from Wikipedia and "onthisday" for data from other websites'
   } else {
-    console.log('inside else')
     req.body.cmdData = 'Hey there!!. This is a bot that sends the historical events for today. For more details use "help"'
   }
   next()
