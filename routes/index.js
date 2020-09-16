@@ -4,7 +4,7 @@ const cheerio = require("cheerio");
 const router = express.Router();
 const { getWikiData, getOnThisDay } = require("./middleware");
 
-router.get("/", checkCmd, async (req, res) => {
+router.get("/", async (req, res) => {
   let data = req.body.cmdData;
   console.log(data);
   res.send("hello world");
