@@ -21,7 +21,7 @@ router.get("/", checkCmd , async (req, res) => {
   res.send(fruits)
 });
 
-router.post("/new-message", async (req, res) => {
+router.post("/new-message", checkCmd ,async (req, res) => {
   const { message } = req.body;
   console.log(req.body.cmdData)
     try {
