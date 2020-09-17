@@ -27,7 +27,7 @@ const checkCmd = async(req,res,next) => {
 
 const getOnThisDay = async () => {
   const events = []
-  const onthisResponse = await axios.get('https://www.onthisday.com/')
+  const onthisResponse = await axios.get('https://www.onthisday.com/today/indian-history.php')
   const $ = cheerio.load(onthisResponse.data)
   $('.event-list--with-advert').each(function(i, elem) {
     events[i] = $(this).text();
