@@ -34,6 +34,7 @@ router.post("/new-message", async (req, res) => {
     );
     res.end("ok");
   } catch (err) {
+    console.log(err)
     res.end(err);
   }
 });
