@@ -23,7 +23,7 @@ router.post("/new-message", async (req, res) => {
   //   cmdData =
   //     'Please use "wiki" for data from Wikipedia and "onthisday" for data from other websites';
   // }
-  let cmdData = await getOnThisDay()
+  let cmdData = await getWikiData()
   //cmdData = cmdData.concat(...cmdData,await getWikiData())
   try {
     let response = await axios.post(
