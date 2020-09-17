@@ -60,4 +60,4 @@ const chuckResponse =  (data) => {
   return choppedData
 };
 
-module.exports = { getWikiData , chuckResponse, checkCmd };
+module.exports = { getWikiData , chuckResponse, checkCmd, getOnThisDay };
