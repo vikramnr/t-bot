@@ -60,7 +60,7 @@ const chuckResponse =  (data) => {
   let dataLen = 0
   for (let u = 0; dataLen <= data.length; u++) {
     dataLen+=20
-    choppedData.push(data.slice(u, u + 20));
+    choppedData.push(data.slice(u, u + 40));
   }
   return choppedData
 };
