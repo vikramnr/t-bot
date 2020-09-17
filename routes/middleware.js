@@ -48,8 +48,8 @@ const getWikiData = async () => {
   data = data.map((d) => d.replace(regex, ""));
   let choppedData = chuckResponse(data);
   choppedData = choppedData[10]
-  let choppedData1 = choppedData[choppedData.length-5]
-  return [...choppedData,...choppedData1].join('****')
+  let choppedData1 = choppedData[choppedData.length-15]
+  return [...choppedData,...choppedData1]
 };
 
 const chuckResponse =  (data) => {
