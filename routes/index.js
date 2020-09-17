@@ -24,10 +24,6 @@ router.post("/new-message", async (req, res) => {
       'Please use "wiki" for data from Wikipedia and "onthisday" for data from other websites';
     }
   }
-  // let cmdData = await getWikiData()
-  // let cmd = await getOnThisDay()
-  // console.log(cmd)
-  // //cmdData = cmdData.concat(...cmdData,await getWikiData())
   try {
     let response = await axios.post(
       `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`,
