@@ -52,7 +52,7 @@ const getWikiData = async () => {
   let choppedData = chuckResponse(data);
   choppedData = choppedData[10]
   let choppedData1 = choppedData[11]
-  return [...choppedData,...choppedData1]
+  return choppedData.concat(choppedData1)
 };
 
 const chuckResponse =  (data) => {
