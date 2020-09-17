@@ -14,17 +14,16 @@ const checkCmd = async(req,res,next) => {
     console.log(cmd)
     if(cmd === 'wiki') {
       req.body.cmdData = await getWikiData()
-      next()
     } else if (cmd === 'onthisday') {
       req.body.cmdData = await getOnThisDay()
-      next()
+    } else {
+      req.body.cmdData = 'Please use "wiki" for data from Wikipedia and "onthisday" for data from other websites'
     }
-    req.body.cmdData = 'Please use "wiki" for data from Wikipedia and "onthisday" for data from other websites'
-    next()
   } else {
     req.body.cmdData = 'Hey there!!. This is a bot that sends the historical events for today. For more details use "help"'
-    next()
+    
   }
+  next()
 }
 
 const getOnThisDay = async () => {
@@ -59,7 +58,7 @@ const chuckResponse =  (data) => {
   let choppedData = []
   let dataLen = 0
   for (let u = 0; dataLen <= data.length; u++) {
-    dataLen+=20
+    dataLen+=40
     choppedData.push(data.slice(u, u + 40));
   }
   return choppedData
