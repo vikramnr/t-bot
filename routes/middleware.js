@@ -51,7 +51,7 @@ const getWikiData = async () => {
   data = data.map((d) => d.replace(regex, ""));
   let choppedData = chuckResponse(data);
   choppedData = choppedData[10]
-  let choppedData1 = choppedData[20]
+  let choppedData1 = choppedData[11]
   return [...choppedData,...choppedData1]
 };
 
