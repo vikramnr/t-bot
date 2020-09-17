@@ -48,10 +48,10 @@ const getWikiData = async () => {
   data = data.map((d) => sanitizeHtml(d));
   const regex = /[[\]]/gi;
   data = data.map((d) => d.replace(regex, ""));
-  let choppedData = chuckResponse(data);
-  choppedData = choppedData[10]
-  let choppedData1 = choppedData[11]
-  return choppedData
+  // let choppedData = chuckResponse(data);
+  // choppedData = choppedData[10]
+  // let choppedData1 = choppedData[11]
+  return data.join('****')
 };
 
 const chuckResponse =  (data) => {
