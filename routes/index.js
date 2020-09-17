@@ -19,9 +19,10 @@ router.post("/new-message", async (req, res) => {
       cmdData = await getWikiData();
     } else if (cmd === "onthisday") {
       cmdData = await getOnThisDay();
-    }
-    cmdData =
+    } else {
+      cmdData =
       'Please use "wiki" for data from Wikipedia and "onthisday" for data from other websites';
+    }
   }
   // let cmdData = await getWikiData()
   // let cmd = await getOnThisDay()
