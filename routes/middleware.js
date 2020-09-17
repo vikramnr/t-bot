@@ -29,7 +29,7 @@ const getOnThisDay = async () => {
   const events = []
   const onthisResponse = await axios.get('https://www.onthisday.com/')
   const $ = cheerio.load(onthisResponse.data)
-  $('.event-list').each(function(i, elem) {
+  $('.event-list--with-advert').each(function(i, elem) {
     events[i] = $(this).text();
   });
   return events.join('***')
@@ -47,7 +47,7 @@ const getWikiData = async () => {
   const regex = /[[\]]/gi;
   data = data.map((d) => d.replace(regex, ""));
   let choppedData = chuckResponse(data);
-  return choppedData[0].join('****')
+  return choppedData[10].join('****')
 };
 
 const chuckResponse =  (data) => {
