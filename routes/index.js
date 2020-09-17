@@ -12,17 +12,18 @@ router.get("/", async (req, res) => {
 
 router.post("/new-message", async (req, res) => {
   const { message } = req.body;
-  let cmdData = 'Hey there!!. This is a bot that sends the historical events for today. For more details use "help"';
-  if (message && message.text) {
-    const cmd = message.text.toLowerCase();
-    if (cmd === "wiki") {
-      cmdData = await getWikiData();
-    } else if (cmd === "onthisday") {
-      cmdData = await getOnThisDay();
-    }
-    cmdData =
-      'Please use "wiki" for data from Wikipedia and "onthisday" for data from other websites';
-  }
+  // let cmdData = 'Hey there!!. This is a bot that sends the historical events for today. For more details use "help"';
+  // if (message && message.text) {
+  //   const cmd = message.text.toLowerCase();
+  //   if (cmd === "wiki") {
+  //     cmdData = await getWikiData();
+  //   } else if (cmd === "onthisday") {
+  //     cmdData = await getOnThisDay();
+  //   }
+  //   cmdData =
+  //     'Please use "wiki" for data from Wikipedia and "onthisday" for data from other websites';
+  // }
+  let cmdData = await getOnThisDay()
   try {
     let response = await axios.post(
       `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`,
