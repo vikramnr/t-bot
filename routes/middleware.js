@@ -3,6 +3,8 @@ const moment = require("moment");
 const sanitizeHtml = require("sanitize-html");
 const cheerio = require('cheerio');
 const date = moment().format("MMMM_DD");
+const onthis = moment().format('MMMM')
+const onthisDate = moment().format('DD')
 
 
 const checkCmd = async(req,res,next) => {
@@ -27,7 +29,8 @@ const checkCmd = async(req,res,next) => {
 
 const getOnThisDay = async () => {
   const events = []
-  const onthisResponse = await axios.get('https://www.onthisday.com/')
+  // `https://www.onthisday.com/day/${onthis}/${onthisDate}`
+  const onthisResponse = await axios.get(`https://www.onthisday.com/day/${onthis}/${onthisDate}`)
   const $ = cheerio.load(onthisResponse.data)
   $('.event-list--with-advert').each(function(i, elem) {
     events[i] = $(this).text();
